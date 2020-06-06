@@ -12,7 +12,7 @@ const Demon =()=>{
        <div
             style={{
               position: "absolute",
-              bottom: TITLE_SIZE*moviment.position.y,
+              top: TITLE_SIZE*moviment.position.y,
               left: TITLE_SIZE*moviment.position.x,
               width:DEMON_TITLE_SIZE,
               height:DEMON_TITLE_SIZE,

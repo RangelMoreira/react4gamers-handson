@@ -10,7 +10,7 @@ const Chest =()=>{
        <div
             style={{
               position: "absolute",
-              bottom: TITLE_SIZE*5,
+              top: TITLE_SIZE*5,
               left: TITLE_SIZE*5,
               width:TITLE_SIZE,
               height:100,

@@ -20,7 +20,7 @@ const Hero =()=>{
        <div
             style={{
               position: "absolute",
-              bottom: TITLE_SIZE*position.y,
+              top: TITLE_SIZE*position.y,
               left: TITLE_SIZE*position.x,
               width:TITLE_SIZE,
               height:TITLE_SIZE+HEAD_OFFSET,
