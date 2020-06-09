@@ -6,21 +6,23 @@ import {TITLE_SIZE, HEAD_OFFSET, EDirection} from '../../settings/constants';
 import './index.css';
 import useHeroMoviment from '../../hooks/useHeroMoviment';
 
-const initialPosition={
-  x:10,
-  y:10,
-  
+// const moviment ={
+//   position: {x: 5, y:5},
+//   direction: EDirection.RIGHT
+// }
+
+interface IProps{
+  initialPosition: {x: number; y:number}
 }
 
-
-const Hero =()=>{
- const {direction,position} = useHeroMoviment(initialPosition);
+const Hero = (props: IProps)=>{
+ const {direction,position} = useHeroMoviment(props.initialPosition);
 
   return(
        <div
             style={{
               position: "absolute",
-              top: TITLE_SIZE*position.y,
+              top: TITLE_SIZE*position.y - HEAD_OFFSET,
               left: TITLE_SIZE*position.x,
               width:TITLE_SIZE,
               height:TITLE_SIZE+HEAD_OFFSET,

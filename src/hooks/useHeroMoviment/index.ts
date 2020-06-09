@@ -1,7 +1,7 @@
 import useEventListener from '@use-it/event-listener';
 import React,{useState} from 'react';
 import { EDirection } from '../../settings/constants';
-import { handleNextPosition } from '../../contexts/canvas/helpers';
+import { handleNextPosition, checkValidMoviment} from '../../contexts/canvas/helpers';
 
 function useHeroMoviment(initialPosition){
   const [positionState,updatePositionState] = useState(initialPosition);
@@ -15,10 +15,17 @@ function useHeroMoviment(initialPosition){
       return;
     }
 
+    
     const nextPosition = handleNextPosition(direction, positionState);
+    
+    // debugger;
+    const isValidMoviment = checkValidMoviment(nextPosition);
+    if (isValidMoviment){
+      updatePositionState(nextPosition);
+       updateDirectionState(direction);
 
-    updatePositionState(nextPosition);
-    updateDirectionState(direction);
+    }
+
 
     // debugger;
   });//usando as teclas

@@ -5,9 +5,17 @@ import {TITLE_SIZE, DEMON_TITLE_SIZE, EDirection} from '../../settings/constants
 import './index.css';
 import useEnenmyMoviment from '../../hooks/useEnemyMoviment';
 
+// const moviment ={
+//   position: {x: 5, y:5},
+//   direction: EDirection.RIGHT
+// }
 
-const Demon =()=>{
-    const moviment = useEnenmyMoviment({x:5, y:5});
+interface IProps{
+  initialPosition: {x: number; y:number}
+}
+
+const Demon =(props:IProps)=>{
+    const moviment = useEnenmyMoviment(props.initialPosition);
     return(
        <div
             style={{
