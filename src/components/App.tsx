@@ -4,7 +4,7 @@ import './App.css';
 
 import Board from './board';
 import { GAME_SIZE } from '../settings/constants';
-import Debugger from './debugger';
+import Game from './Game';
 
 function App() {
   return (
@@ -18,8 +18,8 @@ function App() {
             
           }}
       >
-        <Debugger/>
-        <Board/>
+        <Game/>
+       
       </div>
     </div>
   );

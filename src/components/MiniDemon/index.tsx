@@ -22,7 +22,7 @@ const MiniDemon =(props: IProps)=>{
        <div
             style={{
               position: "absolute",
-              top: TITLE_SIZE*moviment.position.y,
+              top: TITLE_SIZE*moviment.position.y - HEAD_OFFSET,
               left: TITLE_SIZE*moviment.position.x,
               width:TITLE_SIZE,
               height:100,

@@ -1,4 +1,4 @@
-import { EDirection } from "../../settings/constants";
+import { EDirection, EWalker } from "../../settings/constants";
 import React from "react";
 
 export function handleNextPosition(direction, position){
@@ -49,7 +49,7 @@ const HE = ECanvas.HERO;
 export const canvas=[
   [WL,WL,WL,WL,WL,WL,WL,WL,WL,WL,WL,WL,WL,DR,DR,WL,WL,WL,WL,WL],
   [WL,WL,WL,WL,WL,WL,WL,WL,WL,WL,WL,WL,WL,DR,DR,WL,WL,WL,WL,WL],
-  [WL,FL,FL,WL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,WL,FL,FL,WL],
+  [WL,FL,FL,WL,FL,FL,FL,FL,WL,FL,FL,FL,FL,FL,FL,FL,WL,FL,FL,WL],
   [WL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,DE,FL,FL,FL,WL],
   [WL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,WL],
   [WL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,WL],
@@ -64,26 +64,41 @@ export const canvas=[
   [WL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,WL],
   [WL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,TR,FL,FL,FL,FL,TR,CH,FL,WL],
   [WL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,WL],
-  [WL,HE,FL,FL,TR,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,WL],
+  [WL,HE,WL,FL,TR,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,WL],
   [WL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,WL],
   [WL,WL,WL,WL,WL,WL,WL,WL,WL,WL,WL,WL,WL,WL,WL,WL,WL,WL,WL,WL],
 ];
 
-export function checkValidMoviment( nextPosition){
+//verificando se o movimento é válido
+export function checkValidMoviment( nextPosition, walker){
   const canvasValue = canvas[nextPosition.y][nextPosition.x] ;
+
+  const result = walker === EWalker.HERO 
+      ? getHeroValidMovies(canvasValue) 
+      : getEnemyValidMoves(canvasValue);
   
-   if(canvasValue === ECanvas.WALL ){
-      return false;
+  return result;
+  
+  
+
+   function getHeroValidMovies(canvasValue){
+      return{
+        valid: canvasValue === ECanvas.FLOOR || canvasValue === ECanvas.CHEST || canvasValue === ECanvas.TRAP || canvasValue === ECanvas.MINI_DEMON || canvasValue === ECanvas.DEMON,
+        dead: canvasValue === ECanvas.TRAP || canvasValue === ECanvas.MINI_DEMON || canvasValue === ECanvas.DEMON,
+        chest: canvasValue === ECanvas.CHEST,
+        door: canvasValue === ECanvas.DOOR, 
+      }
+
+    
    }
 
-   if (canvasValue === ECanvas.CHEST){
-     console.log('pisou no baú');
+   function getEnemyValidMoves(canvasValue){
+    return{
+      valid: canvasValue === ECanvas.FLOOR || canvasValue === ECanvas.HERO,
+      dead: canvasValue === ECanvas.HERO,
+      chest: false,
+      door: false, 
+    }
    }
-
-   if (canvasValue === ECanvas.TRAP){
-    console.log('pisou na trap');
-   }
-
-   return true;
 
 }
